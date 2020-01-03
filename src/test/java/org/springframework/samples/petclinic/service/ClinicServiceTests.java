@@ -43,8 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
  * ClinicServiceSpringDataJpaTests subclasses benefit from the following services provided by the Spring
  * TestContext Framework: </p> <ul> <li><strong>Spring IoC container caching</strong> which spares us unnecessary set up
  * time between test execution.</li> <li><strong>Dependency Injection</strong> of test fixture instances, meaning that
- * we don't need to perform application context lookups. See the use of {@link Autowired @Autowired} on the <code>{@link
- * ClinicServiceTests#clinicService clinicService}</code> instance variable, which uses autowiring <em>by
+ * we don't need to perform application context lookups. See the use of {@link Autowired @Autowired} on the <code> </code> instance variable, which uses autowiring <em>by
  * type</em>. <li><strong>Transaction management</strong>, meaning each test method is executed in its own transaction,
  * which is automatically rolled back by default. Thus, even if tests insert or otherwise change database state, there
  * is no need for a teardown or cleanup script. <li> An {@link org.springframework.context.ApplicationContext
@@ -74,10 +73,10 @@ class ClinicServiceTests {
 
     @Test
     void shouldFindOwnersByLastName() {
-        Collection<Owner> owners = this.owners.findByLastName("Davis");
+        Collection<Owner> owners = this.owners.findByFirstName("Davis");
         assertThat(owners).hasSize(2);
 
-        owners = this.owners.findByLastName("Daviss");
+        owners = this.owners.findByFirstName("Daviss");
         assertThat(owners).isEmpty();
     }
 
@@ -93,7 +92,7 @@ class ClinicServiceTests {
     @Test
     @Transactional
     void shouldInsertOwner() {
-        Collection<Owner> owners = this.owners.findByLastName("Schultz");
+        Collection<Owner> owners = this.owners.findByFirstName("Schultz");
         int found = owners.size();
 
         Owner owner = new Owner();
@@ -105,7 +104,7 @@ class ClinicServiceTests {
         this.owners.save(owner);
         assertThat(owner.getId().longValue()).isNotEqualTo(0);
 
-        owners = this.owners.findByLastName("Schultz");
+        owners = this.owners.findByFirstName("Schultz");
         assertThat(owners.size()).isEqualTo(found + 1);
     }
 
