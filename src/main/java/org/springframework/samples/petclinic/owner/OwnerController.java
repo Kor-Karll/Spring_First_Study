@@ -81,7 +81,7 @@ class OwnerController {
     public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
 
         // allow parameterless GET request for /owners to return all records
-        if (owner.getFirstName() == null) {
+        if (owner.get`First`Name() == null) {
             owner.setFirstName(""); // empty string signifies broadest possible search
         }
 
