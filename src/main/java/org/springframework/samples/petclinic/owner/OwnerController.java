@@ -43,7 +43,6 @@ class OwnerController {
     private final OwnerRepository owners;
     private VisitRepository visits;
 
-
     public OwnerController(OwnerRepository clinicService, VisitRepository visits) {
         this.owners = clinicService;
         this.visits = visits;
@@ -81,7 +80,7 @@ class OwnerController {
     public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
 
         // allow parameterless GET request for /owners to return all records
-        if (owner.get`First`Name() == null) {
+        if (owner.getFirstName() == null) {
             owner.setFirstName(""); // empty string signifies broadest possible search
         }
 
